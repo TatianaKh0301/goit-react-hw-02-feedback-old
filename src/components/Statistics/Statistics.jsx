@@ -6,8 +6,6 @@ class Feedback extends Component {
         initialGood: 0,
         initialNeutral: 0,
         initialBad: 0,
-        initialTotal: 0,
-        initialPositiveFeedbackPercentage: 0,
     }
     
     static propTypes = {
@@ -43,14 +41,18 @@ class Feedback extends Component {
     };
 
     countTotalFeedback = () => {
-        const total = this.initialTotal + 3;
-        console.log("total", total);
-    }
-    // countPositiveFeedbackPercentage = () => {
+        return this.state.good + this.state.neutral + this.state.bad;
+    };
 
-    // }
-
+    countPositiveFeedbackPercentage = () => {
+        return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(0);
+    } 
+    
     render() {
+        const totalFeedback = this.countTotalFeedback();
+        
+        const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    
         return (
             <section>
                 <h1>Please leave feedback</h1>
@@ -65,15 +67,13 @@ class Feedback extends Component {
                         <li>Good: {this.state.good}</li>
                         <li>Neutral: {this.state.neutral}</li>
                         <li>Bad: {this.state.bad}</li>
-                        <li>Total:{0}</li>
-                        <li>Positive feedback:{0}</li>
+                        <li>Total:{totalFeedback}</li>
+                        <li>Positive feedback:{totalFeedback===0 ? 0 : positiveFeedbackPercentage}%</li>
                     </ul>
                 </div>                
             </section>
         )
     }
 }
-
-
 
 export default Feedback;
