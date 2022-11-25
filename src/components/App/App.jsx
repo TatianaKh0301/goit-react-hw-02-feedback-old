@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FeedbackOptions from 'components/FeedbackOptions';
-// import Statistics from 'components/Statistics'
-
+import Statistics from 'components/Statistics';
+import { Container, Section, TitleSection } from './App.styled';
 
 export class App extends Component {
     state = {
@@ -43,26 +43,25 @@ export class App extends Component {
         const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
 
         return (
-            <section>
-                <h1>Please leave feedback</h1>
+            <Section>
+                <TitleSection>Please leave feedback</TitleSection>
+                <Container>
+                    <FeedbackOptions 
+                        onHandleGood={this.handleGood} 
+                        onHandleNeutral={this.handleNeutral}
+                        onHandleBad={this.handleBad}
+                    />
 
-                <FeedbackOptions 
-                    onHandleGood={this.handleGood} 
-                    onHandleNeutral={this.handleNeutral}
-                    onHandleBad={this.handleBad}
-                />
-                
-                <div>
-                    <h2>Statistics</h2>
-                    <ul>
-                        <li>Good: {this.state.good}</li>
-                        <li>Neutral: {this.state.neutral}</li>
-                        <li>Bad: {this.state.bad}</li>
-                        <li>Total:{totalFeedback}</li>
-                        <li>Positive feedback:{totalFeedback===0 ? 0 : positiveFeedbackPercentage}%</li>
-                    </ul>
-                </div>                
-            </section>
+                    <Statistics
+                        good={this.state.good}
+                        neutral={this.state.neutral}
+                        bad={this.state.bad}
+                        total={totalFeedback}
+                        positivePercentage={positiveFeedbackPercentage}
+                    />
+                </Container>
+                            
+            </Section>
         )
 }
 };

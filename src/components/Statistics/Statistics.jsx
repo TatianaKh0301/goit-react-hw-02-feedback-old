@@ -1,22 +1,17 @@
-import React, { Component} from 'react';
+import React from 'react';
+// import { Container, StatisticsList, StatisticsItem } from './Statistics.styled';
 
-class Statistics extends Component {
-        
-     render() {
-            
-        return (
-                <div>
-                    <h2>Statistics</h2>
-                    <ul>
-                        <li>Good: {this.state.good}</li>
-                        <li>Neutral: {this.state.neutral}</li>
-                        <li>Bad: {this.state.bad}</li>
-                        <li>Total:{totalFeedback}</li>
-                        <li>Positive feedback:{totalFeedback===0 ? 0 : positiveFeedbackPercentage}%</li>
-                    </ul>
-                </div>
-        )
-    }
-}
+const Statistics = ( {good, neutral, bad, total, positivePercentage} ) => (
+    <div>
+        <h2>Statistics</h2>
+        <div>
+            <p>Good: {good}</p>
+            <p>Neutral: {neutral}</p>
+            <p>Bad: {bad}</p>
+            <p>Total:{total}</p>
+            <p>Positive feedback:{total===0 ? 0 : positivePercentage}%</p>
+        </div>
+    </div>
+);
 
 export default Statistics;
